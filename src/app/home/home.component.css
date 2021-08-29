@@ -1,0 +1,11 @@
+table{
+    table-layout: fixed;
+    min-width: 750px;
+}
+table td{
+    width: 33%;
+    min-width: 33%;
+}
+table th{
+    background-color: #b1b1b1;
+}
