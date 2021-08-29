@@ -1,4 +1,148 @@
+
 <h1>Welcome to ItemListMerger</h1>
+
+
+<!-- BEGIN NEXT ARRAY MERGE TESTER -->
+
+<h2>THE RIGHT SOLUTION - KEEP ALL UNIQUE OBJECTS (ALL OBJECTS ARE UNIQUE)</h2>
+
+<p>
+    All objects in the provided arrays are unique. Just because some objects have identical property values, it does not make them identical. The way these objects were initialized, we
+    would still be referring to different objects while accessing them.
+</p>
+
+<h3>A Different Story would have been...</h3>
+<pre>
+    <code [innerHTML]="code"></code>
+</pre>
+
+<p>
+    In the above scenario we would have three duplicate objects in our array.
+</p>
+
+<h3>The solution to your provided example</h3>
+
+<table style="margin-bottom: 60px;">
+    <tr>
+        <th>List#1</th>
+        <th>List#2</th>
+        <th>Merged List</th>
+    </tr>
+    <tr>
+        <td style="padding-right: 100px;">
+            <div *ngFor="let item of itemList1">
+                <span>{{  item.id }}</span> |
+                <span>{{  item.name }}</span> |
+                <span>${{  item.price }}</span>
+            </div>
+        </td>
+
+        <td>
+            <div *ngFor="let item of itemList2">
+                <span>{{  item.id }}</span> |
+                <span>{{  item.name }}</span> |
+                <span>${{  item.price }}</span>
+            </div>
+        </td>
+
+        <td *ngIf="itemList2WasMerged">
+
+            <div *ngFor="let item of mergedItemList2">
+                <span>{{  item.id }}</span> |
+                <span>{{  item.name }}</span> |
+                <span>${{  item.price }}</span>
+            </div>
+            
+        </td>
+
+    </tr>
+
+</table>
+
+<p *ngIf="itemList2WasMerged">
+    Time taken to execute function: {{ t2 }} milliseconds.
+    <br/>
+    Based on these results we can decide which function we want to use.
+</p>
+
+<p>
+    Click below to merge Item Lists and keep all unique objects.
+</p>
+
+<!-- We could either assign our events here or in the component's typescript. -->
+<button (click)="mergeItemList3([itemList1, itemList2])">MERGE ITEMS LIST</button>
+
+<!-- END ARRAY MERGE TESTER -->
+
+<br/>
+<hr/>
+<br/>
+
+<!-- BEGIN NEXT ARRAY MERGE TESTER -->
+
+<h3>The solution to ACTUAL duplicate objects:</h3>
+
+<pre>
+    <code [innerHTML]="code2"></code>
+</pre>
+
+<table style="margin-bottom: 60px;">
+    <tr>
+        <th>List#1</th>
+        <th>List#2</th>
+        <th>Merged List</th>
+    </tr>
+    <tr>
+        <td style="padding-right: 100px;">
+            <div *ngFor="let item of itemList2">
+                <span>{{  item.id }}</span> |
+                <span>{{  item.name }}</span> |
+                <span>${{  item.price }}</span>
+            </div>
+        </td>
+
+        <td>
+            <div *ngFor="let item of itemList3">
+                <span>{{  item.id }}</span> |
+                <span>{{  item.name }}</span> |
+                <span>${{  item.price }}</span>
+            </div>
+        </td>
+
+        <td *ngIf="itemList3WasMerged">
+
+            <div *ngFor="let item of mergedItemList3">
+                <span>{{  item.id }}</span> |
+                <span>{{  item.name }}</span> |
+                <span>${{  item.price }}</span>
+            </div>
+            
+        </td>
+
+    </tr>
+
+</table>
+
+<p *ngIf="itemList3WasMerged">
+    Time taken to execute function: {{ t3 }} milliseconds.
+    <br/>
+    Based on these results we can decide which function we want to use to merge unique objects into our array.
+</p>
+
+<p>
+    Click below to merge Item Lists and keep all unique objects.
+</p>
+
+<!-- We could either assign our events here or in the component's typescript. -->
+<button (click)="mergeItemList4()">MERGE ITEMS LIST ACTUAL DUPLICATES</button>
+
+<!-- END ARRAY MERGE TESTER -->
+
+<br/>
+<hr/>
+<br/>
+
+<h3>The solution to unique valued objects #1:</h3>
 
 <table style="margin-bottom: 60px;">
     <tr>
@@ -59,6 +203,9 @@
 <br/>
 
 <!-- BEGIN NEXT ARRAY MERGE TESTER -->
+
+<h3>The solution to unique valued objects #2:</h3>
+
 <table style="margin-bottom: 60px;">
     <tr>
         <th>List#1</th>
@@ -98,8 +245,6 @@
 
 <p *ngIf="itemList1WasMerged">
     Time taken to execute function: {{ t1 }} milliseconds.
-    <br/>
-    {{ m1 }}
     <br/><br/>
     Based on these results we can decide which function we want to use to merge distinct valued objects into our array.
 </p>
@@ -112,3 +257,7 @@
 <button (click)="mergeItemListWithLoadDashUnion([itemList1, itemList2])">MERGE ITEMS LIST #2</button>
 
 <!-- END ARRAY MERGE TESTER -->
+
+<br/>
+<hr/>
+<br/>

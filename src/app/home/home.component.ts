@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
    */
   itemList1: Array<Item> = []
   itemList2: Array<Item> = []
+  itemList3: Array<Item> = []
+  itemList4: Array<Item> = []  
 
   /**
    * Item list 0 was merged.
@@ -37,7 +39,6 @@ export class HomeComponent implements OnInit {
   mergedItemList1: Array<Item> = new Array()
 
   t1: any = null //Time taken to execute second array merge method.
-  m1: any = null //Heap (Space, RAM) taken to execute second array merge method.
 
   /**
    * Item list 2 was merged.
@@ -46,10 +47,69 @@ export class HomeComponent implements OnInit {
   /**
    * Resultant merged item list.
    */  
-  mergedItemList2: Set<Item> = new Set()
+  mergedItemList2: Array<Item> = new Array()
 
   t2: any = null //Time taken to execute third array merge method.
-  m2: any = null //Heap (Space, RAM) taken to execute third array merge method.
+
+  /**
+   * Item list 2 was merged.
+   */
+   itemList3WasMerged: boolean = false
+   /**
+    * Resultant merged item list.
+    */  
+   mergedItemList3: Set<Item> = new Set()
+ 
+   t3: any = null //Time taken to execute third array merge method.
+
+
+  code = `
+  
+  let myDuplicateObject = new Item(1, 'shirt', 10)
+
+  itemList1 = [
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    new Item(2, 'pants', 20),
+    new Item(2, 'pants', 20),
+    new Item(2, 'pants', 20),
+    new Item(3, 'shoes', 50),
+    new Item(5, 'wallet', 30),
+    new Item(5, 'wallet', 30),
+    new Item(8, 'belt', 30),
+    new Item(9, 'watch', 30)
+  ]
+
+  `
+
+  code2 = `
+  let myDuplicateObject = new Item(1, 'shirt', 10)
+
+  this.itemList3 = [
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    new Item(9, 'watch', 30)
+  ]
+
+  this.itemList4 = [
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    myDuplicateObject,
+    new Item(9, 'watch', 30)
+  ]
+  `
 
   constructor(private itemService: ItemService) { }
   
@@ -80,6 +140,32 @@ export class HomeComponent implements OnInit {
       new Item(5, 'wallet', 30),
       new Item(5, 'wallet', 30),
       new Item(8, 'belt', 30),
+      new Item(9, 'watch', 30)
+    ]
+
+    let myDuplicateObject = new Item(1, 'shirt', 10)
+
+    this.itemList3 = [
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      new Item(9, 'watch', 30)
+    ]
+
+    this.itemList4 = [
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
+      myDuplicateObject,
       new Item(9, 'watch', 30)
     ]
 
@@ -130,6 +216,38 @@ export class HomeComponent implements OnInit {
     //Display our merged Item List in our interface.
     this.itemList1WasMerged = true
 
+  }
+
+  public mergeItemList3(itemLists: Array<any>){
+    //Let's measure the performance of this method.
+    let t0 = performance.now()
+
+    //Will return a mergedItemList wi non-duplicated valued objects.
+    this.mergedItemList2 = this.itemService.mergeItemList3(itemLists)
+
+    //Let's measure the performance of this method.
+    let t1 = performance.now()
+
+    this.t2 = t1 - t0
+
+    //Display our merged Item List in our interface.
+    this.itemList2WasMerged = true
+  }
+
+  public mergeItemList4(){
+    //Let's measure the performance of this method.
+    let t0 = performance.now()
+
+    //Will return a mergedItemList wi non-duplicated valued objects.
+    this.mergedItemList3 = this.itemService.mergeItemList4([this.itemList3, this.itemList4])
+
+    //Let's measure the performance of this method.
+    let t1 = performance.now()
+
+    this.t3 = t1 - t0
+
+    //Display our merged Item List in our interface.
+    this.itemList3WasMerged = true
   }
 
   ngOnInit(): void {  

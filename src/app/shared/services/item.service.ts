@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { forEach } from 'lodash';
 import { Item } from '../models/item';
 
 @Injectable({
@@ -65,6 +66,40 @@ export class ItemService {
       return JSON.stringify(_.pick(elem, ['id', 'name', 'price']))
     })
 
+    return mergedItemList
+
+  }
+
+  public mergeItemList3(itemLists: Array<Array<Item>>): Array<Item>{
+
+    let mergedItemList: Array<Item> = new Array()
+    
+    itemLists.forEach(itemList => {
+
+      itemList.forEach(item => {
+        mergedItemList.push(item)
+      })
+
+    })
+    
+    //Let's use .uniqBy from the lodash JavaScript Library
+    mergedItemList = _.uniq(mergedItemList)
+
+    return mergedItemList
+
+  }
+
+
+  public mergeItemList4(itemLists: Array<Array<Item>>): Set<Item>{
+
+    let mergedItemList: Set<Item> = new Set()
+    
+    itemLists.forEach(itemList => {
+      
+      itemList.forEach(mergedItemList.add, mergedItemList)
+      
+    })
+    
     return mergedItemList
 
   }
